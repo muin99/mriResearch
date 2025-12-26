@@ -1,0 +1,175 @@
+================================================================================
+WHICH PYTHON SCRIPT TO RUN? - QUICK GUIDE
+================================================================================
+
+You have 3 Python scripts. Here's which one to run for your purpose:
+
+================================================================================
+🎯 MAIN TRAINING SCRIPT (START HERE!)
+================================================================================
+
+SCRIPT: train_complete_model.py
+
+COMMAND:
+    python train_complete_model.py
+
+WHAT IT DOES:
+✓ Complete training pipeline (70-15-15 split)
+✓ Trains ResNet18 model for 2-3+ hours
+✓ Generates 16 research-grade visualizations
+✓ Creates 7 CSV tables with metrics
+✓ Saves best model automatically
+✓ Comprehensive analysis and evaluation
+
+WHEN TO USE:
+→ You want to train a model and get complete results
+→ You want all visualizations and metrics
+→ This is your MAIN script for the research project
+
+OUTPUT:
+→ training_results/ folder with everything
+
+TIME: 2-4 hours on RTX 3050 6GB
+
+================================================================================
+📊 DATASET EXPLORATION SCRIPT
+================================================================================
+
+SCRIPT: dataset_exploration.py
+
+COMMAND:
+    python dataset_exploration.py
+
+WHAT IT DOES:
+✓ Downloads dataset from Kaggle (if not already downloaded)
+✓ Explores dataset structure
+✓ Analyzes basic statistics
+✓ Creates sample visualizations
+✓ Shows class distribution
+
+WHEN TO USE:
+→ First time working with the dataset
+→ Want to understand dataset structure
+→ Need to verify dataset is correctly organized
+→ Before running training (optional but recommended)
+
+OUTPUT:
+→ dataset_exploration_results.json
+→ dataset_samples.png
+
+TIME: 1-5 minutes
+
+================================================================================
+🔬 AUGMENTATION EVALUATION TEMPLATE
+================================================================================
+
+SCRIPT: augmentation_evaluation_template.py
+
+COMMAND:
+    python augmentation_evaluation_template.py
+
+WHAT IT DOES:
+✓ Framework for evaluating all 53 augmentation techniques
+✓ Compares performance across different techniques
+✓ Creates comparison visualizations
+✓ For Research Direction #1 (systematic evaluation)
+
+WHEN TO USE:
+→ You want to evaluate specific augmentation techniques
+→ Research Direction #1 from RESEARCH_PROPOSAL.md
+→ Compare different augmentation methods
+→ NOT for initial training - this is for advanced research
+
+OUTPUT:
+→ augmentation_evaluation_results.csv
+→ Comparison visualizations
+
+TIME: Varies (depends on how many techniques you evaluate)
+
+NOTE: This is a TEMPLATE - you need to modify it for your specific needs
+
+================================================================================
+📋 RECOMMENDED WORKFLOW
+================================================================================
+
+STEP 1: (Optional) Explore Dataset
+    python dataset_exploration.py
+    → Understand your dataset structure
+
+STEP 2: (MAIN) Train Model
+    python train_complete_model.py
+    → This is your primary script!
+    → Generates all results and visualizations
+    → Takes 2-4 hours
+
+STEP 3: (Optional) Advanced Research
+    python augmentation_evaluation_template.py
+    → Only if you want to do systematic augmentation evaluation
+    → Modify the script first for your needs
+
+================================================================================
+🎯 QUICK ANSWER
+================================================================================
+
+FOR TRAINING AND COMPLETE RESULTS:
+    → python train_complete_model.py
+    → This is the MAIN script you need!
+
+FOR DATASET EXPLORATION:
+    → python dataset_exploration.py
+    → Optional, run once to understand dataset
+
+FOR ADVANCED RESEARCH:
+    → python augmentation_evaluation_template.py
+    → Only for specific research directions
+
+================================================================================
+📁 WHAT EACH SCRIPT CREATES
+================================================================================
+
+train_complete_model.py creates:
+    training_results/
+    ├── models/          (Trained model)
+    ├── plots/           (16 visualizations)
+    ├── tables/          (7 CSV files)
+    ├── checkpoints/     (Model checkpoints)
+    └── *.json, *.csv    (Metrics and config)
+
+dataset_exploration.py creates:
+    dataset_exploration_results.json
+    dataset_samples.png
+
+augmentation_evaluation_template.py creates:
+    augmentation_evaluation_results.csv
+    augmentation_comparison.png
+
+================================================================================
+⚠️ IMPORTANT NOTES
+================================================================================
+
+1. train_complete_model.py is your PRIMARY script
+   → Run this for complete training and analysis
+
+2. dataset_exploration.py is OPTIONAL
+   → Good for first-time dataset inspection
+
+3. augmentation_evaluation_template.py is ADVANCED
+   → Only for specific research directions
+   → Requires modification before use
+
+4. You can run them in any order, but:
+   → Start with train_complete_model.py for main results
+   → Others are supplementary
+
+================================================================================
+🚀 START HERE
+================================================================================
+
+If you just want to train and get results:
+
+    python train_complete_model.py
+
+That's it! Everything else is optional.
+
+================================================================================
+
