@@ -1,0 +1,101 @@
+================================================================================
+QUICK START GUIDE - TRAINING SCRIPT
+================================================================================
+
+QUICK INSTALLATION (3 STEPS):
+-----------------------------
+1. Install PyTorch with CUDA:
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+2. Install other requirements:
+   pip install -r requirements_training.txt
+
+3. Run training:
+   python train_complete_model.py
+
+WHAT THE SCRIPT DOES:
+---------------------
+✓ Loads dataset from 'breast_mri_dataset' folder
+✓ Splits data: 70% train, 15% validation, 15% test
+✓ Trains ResNet18 model for 2-3+ hours (100 epochs max)
+✓ Saves best model automatically
+✓ Generates 8+ research-grade visualizations
+✓ Creates comprehensive metrics tables
+✓ Saves all results to 'training_results' folder
+
+OUTPUT FILES:
+-------------
+training_results/
+├── models/
+│   └── best_model.pth          # Best trained model
+├── plots/
+│   ├── 01_dataset_statistics.png
+│   ├── 02_training_history.png
+│   ├── 03_confusion_matrix.png
+│   ├── 04_roc_curve.png
+│   ├── 05_precision_recall_curve.png
+│   ├── 06_metrics_comparison.png
+│   ├── 07_prediction_distribution.png
+│   └── 08_metrics_table.png
+├── tables/
+│   ├── overall_metrics.csv
+│   └── per_class_metrics.csv
+├── checkpoints/                # Model checkpoints every 10 epochs
+├── training_history.csv         # Complete training log
+├── test_metrics.json           # Final test set metrics
+└── training_config.json         # Configuration used
+
+VISUALIZATIONS INCLUDED:
+------------------------
+1. Dataset Statistics - Class distribution, split visualization
+2. Training History - Loss, accuracy, learning rate curves
+3. Confusion Matrix - Classification performance matrix
+4. ROC Curve - Receiver Operating Characteristic
+5. Precision-Recall Curve - PR-AUC visualization
+6. Metrics Comparison - Per-class precision, recall, F1
+7. Prediction Distribution - Probability distributions
+8. Metrics Table - Publication-ready summary table
+
+CONFIGURATION (in train_complete_model.py):
+-------------------------------------------
+CONFIG = {
+    'batch_size': 16,           # Adjust if GPU memory issues
+    'num_epochs': 100,          # Maximum epochs
+    'learning_rate': 0.001,     # Initial learning rate
+    'patience': 15,             # Early stopping patience
+    'image_size': 224,          # Input image size
+}
+
+TRAINING TIME:
+-------------
+- Expected: 2-4 hours on RTX 3050 6GB
+- Early stopping if no improvement (saves time)
+- Checkpoints every 10 epochs (resume if needed)
+
+MONITORING:
+-----------
+The script prints:
+- Training progress with progress bars
+- Loss and accuracy each epoch
+- Best model saves automatically
+- Final test set metrics
+
+TIPS:
+-----
+✓ Let it run - training takes time but is fully automated
+✓ Check 'training_results/plots' for visualizations
+✓ Best model saved automatically when validation improves
+✓ Can stop early (Ctrl+C) - best model already saved
+✓ Resume from checkpoint if needed (modify script)
+
+TROUBLESHOOTING:
+---------------
+Memory Error? → Reduce batch_size to 8 or 4
+CUDA Error? → Check CUDA installation (see INSTALLATION_GUIDE.txt)
+Dataset Error? → Check folder structure matches expected format
+
+================================================================================
+For detailed installation, see INSTALLATION_GUIDE.txt
+For research details, see RESEARCH_SUMMARY.txt
+================================================================================
+
