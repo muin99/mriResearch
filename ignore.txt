@@ -3,14 +3,47 @@ Results will be saved to: training_results
 ============================================================
 BREAST MRI TUMOR CLASSIFICATION - COMPLETE TRAINING PIPELINE
 ============================================================
-Start Time: 2025-12-26 23:15:24
-Traceback (most recent call last):
-  File "C:\Users\mdhoz\Downloads\muin-experiment\mriResearch\train_complete_model.py", line 1415, in <module>
-    main()
-    ~~~~^^
-  File "C:\Users\mdhoz\Downloads\muin-experiment\mriResearch\train_complete_model.py", line 1216, in main
-    CONFIG['device'] = get_device()
-                       ^^^^^^^^^^
-NameError: name 'get_device' is not defined
+Start Time: 2025-12-26 23:18:29
 
-C:\Users\mdhoz\Downloads\muin-experiment\mriResearch>
+⚠ CUDA is NOT available - using CPU
+  Training will be slower on CPU
+  Consider installing CUDA-enabled PyTorch for GPU acceleration
+
+Using device: cpu
+
+⚠ CPU Mode - Adjusted settings:
+  Batch Size: 8 (CPU optimized)
+  Workers: 2
+  Mixed Precision: Disabled (CPU mode)
+
+============================================================
+LOADING DATASET
+============================================================
+Total images found: 138965
+Classes: ['Benign', 'Malignant']
+Class distribution:
+  Benign: 69335 images (49.89%)
+  Malignant: 69630 images (50.11%)
+
+Dataset Split:
+  Training: 97275 images (70.0%)
+  Validation: 20844 images (15.0%)
+  Testing: 20846 images (15.0%)
+Saved: training_results\plots\01_dataset_statistics.png
+
+============================================================
+CREATING MODEL
+============================================================
+Model: ResNet18
+Number of parameters: 11,177,538
+
+============================================================
+TRAINING MODEL
+============================================================
+
+Epoch 1/100
+------------------------------------------------------------
+Training:   0%|                                     | 0/12160 [00:00<?, ?it/s]Results will be saved to: training_results
+Results will be saved to: training_results
+Training:   0%|                          | 44/12160 [00:24<1:16:31,  2.64it/s]
+
