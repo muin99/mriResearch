@@ -1,0 +1,166 @@
+================================================================================
+HOW TO INSTALL AND RUN EVERYTHING AUTOMATICALLY
+================================================================================
+
+You have TWO options to install everything and run the scripts:
+
+================================================================================
+OPTION 1: PYTHON SCRIPT (RECOMMENDED - More Detailed)
+================================================================================
+
+COMMAND:
+    python setup_and_run.py
+
+WHAT IT DOES:
+✓ Checks Python and pip installation
+✓ Upgrades pip to latest version
+✓ Installs PyTorch with CUDA support (or CPU if CUDA fails)
+✓ Installs all required libraries from requirements_training.txt
+✓ Verifies all packages are installed
+✓ Optionally runs dataset exploration
+✓ Runs main training script
+
+FEATURES:
+- Detailed progress messages
+- Error handling and recovery
+- Verification of installations
+- Interactive prompts for optional steps
+
+TIME:
+- Installation: 15-30 minutes
+- Training: 2-4 hours (additional)
+
+================================================================================
+OPTION 2: BATCH SCRIPT (Windows - Quick)
+================================================================================
+
+COMMAND:
+    setup_and_run.bat
+
+OR double-click: setup_and_run.bat
+
+WHAT IT DOES:
+✓ Same as Python script but simpler interface
+✓ Windows batch file format
+✓ Faster execution
+✓ Less detailed output
+
+FEATURES:
+- Quick execution
+- Windows-friendly
+- Automatic error handling
+
+TIME:
+- Installation: 15-30 minutes
+- Training: 2-4 hours (additional)
+
+================================================================================
+MANUAL INSTALLATION (If Scripts Don't Work)
+================================================================================
+
+If the automated scripts don't work, follow these steps:
+
+STEP 1: Upgrade pip
+    python -m pip install --upgrade pip
+
+STEP 2: Install PyTorch with CUDA
+    python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+STEP 3: Install all requirements
+    python -m pip install -r requirements_training.txt
+
+STEP 4: Verify installation
+    python -c "import torch; print('PyTorch:', torch.__version__)"
+
+STEP 5: Run training
+    python train_complete_model.py
+
+================================================================================
+WHAT GETS INSTALLED
+================================================================================
+
+Core Deep Learning:
+- PyTorch (with CUDA support if available)
+- TorchVision
+- TorchAudio
+
+Data Processing:
+- NumPy
+- Pandas
+- Pillow (PIL)
+- OpenCV
+
+Machine Learning:
+- scikit-learn
+- scikit-image
+- SciPy
+
+Visualization:
+- Matplotlib
+- Seaborn
+
+Utilities:
+- tqdm (progress bars)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "Python is not recognized"
+Solution:
+- Make sure Python is installed
+- Add Python to PATH during installation
+- Or use full path: C:\Python3x\python.exe setup_and_run.py
+
+Problem: "pip is not recognized"
+Solution:
+- Python 3.4+ includes pip by default
+- Try: python -m ensurepip --upgrade
+- Or install pip manually
+
+Problem: "CUDA installation fails"
+Solution:
+- Script will automatically try CPU-only version
+- CPU version will work but be slower
+- For CUDA, install CUDA Toolkit from NVIDIA
+
+Problem: "Some packages fail to install"
+Solution:
+- Check internet connection
+- Try installing packages one by one
+- Some packages may have platform-specific issues
+
+Problem: "Out of memory during training"
+Solution:
+- Reduce batch_size in train_complete_model.py (CONFIG section)
+- Close other applications
+- Use CPU mode if GPU memory is limited
+
+================================================================================
+RECOMMENDED WORKFLOW
+================================================================================
+
+1. Run setup script:
+   python setup_and_run.py
+
+2. Wait for installation (15-30 minutes)
+
+3. Script will ask if you want to:
+   - Run dataset exploration (optional)
+   - Start training (recommended)
+
+4. Let training run (2-4 hours)
+
+5. Check results in 'training_results' folder
+
+================================================================================
+QUICK START
+================================================================================
+
+Just run:
+    python setup_and_run.py
+
+And follow the prompts!
+
+================================================================================
+
