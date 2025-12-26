@@ -1,0 +1,70 @@
+================================================================================
+ENHANCED FEATURES - ADDITIONAL VISUALIZATIONS AND TABLES
+================================================================================
+
+NEW ADDITIONS TO TRAINING SCRIPT:
+---------------------------------
+
+1. EXTENDED METRICS CALCULATION
+   ✓ Cohen's Kappa Score
+   ✓ Matthews Correlation Coefficient
+   ✓ Hamming Loss
+   ✓ Jaccard Score
+   ✓ Macro vs Weighted averages comparison
+
+2. DETAILED LEARNING CURVE ANALYSIS
+   ✓ Moving average smoothing
+   ✓ Overfitting/underfitting detection
+   ✓ Generalization gap visualization
+   ✓ Training efficiency metrics
+
+3. ENHANCED CONFUSION MATRIX
+   ✓ Absolute values matrix
+   ✓ Percentage values matrix
+   ✓ Side-by-side comparison
+
+4. ADVANCED ROC ANALYSIS
+   ✓ Standard ROC curve
+   ✓ ROC with optimal threshold identification
+   ✓ FPR/TPR at optimal point
+
+5. PERFORMANCE HEATMAPS
+   ✓ Per-class metrics heatmap
+   ✓ Overall vs macro average comparison
+   ✓ Color-coded performance visualization
+
+6. STATISTICAL ANALYSIS PLOTS
+   ✓ Actual vs predicted distribution
+   ✓ Probability distribution by class
+   ✓ Box plots for probability analysis
+   ✓ Probability correlation plots
+
+7. COMPREHENSIVE ERROR ANALYSIS
+   ✓ Confidence distribution (correct vs incorrect)
+   ✓ Error confusion matrix
+   ✓ Error rate by class
+   ✓ Error probability distribution
+
+8. EXTENSIVE METRICS TABLES
+   ✓ Overall metrics table
+   ✓ Training history metrics table
+   ✓ Per-class detailed metrics table
+   ✓ Model comparison table
+   ✓ All saved as CSV for further analysis
+
+TOTAL OUTPUT:
+-------------
+- 16 High-resolution visualizations (300 DPI)
+- 7 CSV tables with detailed metrics
+- 2 JSON configuration files
+- Complete training history
+- Best model checkpoint
+
+ALL VISUALIZATIONS ARE:
+- Publication-ready (300 DPI)
+- Professionally formatted
+- Research-grade quality
+- Suitable for papers and presentations
+
+================================================================================
+

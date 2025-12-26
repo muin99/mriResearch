@@ -1,0 +1,220 @@
+================================================================================
+COMPLETE LIST OF VISUALIZATIONS AND TABLES GENERATED
+================================================================================
+
+TOTAL: 16 High-Resolution Visualizations + 7 CSV Tables + 2 JSON Files
+
+================================================================================
+VISUALIZATIONS (16 PLOTS - All 300 DPI, Publication-Ready)
+================================================================================
+
+1. DATASET STATISTICS (01_dataset_statistics.png)
+   - Dataset split distribution (pie chart)
+   - Training set class distribution
+   - Overall class distribution
+   - Class distribution across all splits (comparison)
+
+2. TRAINING HISTORY (01_training_history.png)
+   - Training and validation loss curves
+   - Training and validation accuracy curves
+   - Learning rate schedule
+   - Loss vs accuracy relationship (scatter)
+
+3. DETAILED LEARNING CURVES (02_detailed_learning_curves.png)
+   - Loss curves with moving average
+   - Accuracy curves with moving average
+   - Overfitting/underfitting indicator
+   - Generalization gap analysis
+   - Learning rate schedule (detailed)
+   - Training efficiency over time
+
+4. CONFUSION MATRIX (03_confusion_matrix.png)
+   - Standard confusion matrix with absolute values
+   - Color-coded heatmap
+
+5. CONFUSION MATRIX DETAILED (04_confusion_matrix_detailed.png)
+   - Confusion matrix with absolute values
+   - Confusion matrix with percentage values
+   - Side-by-side comparison
+
+6. ROC CURVE (05_roc_curve.png)
+   - Standard ROC curve with AUC
+   - Random classifier baseline
+   - Area under curve highlighted
+
+7. ROC COMPARISON (06_roc_comparison.png)
+   - ROC curve with optimal threshold point
+   - FPR and TPR at optimal threshold
+   - Comparison with random classifier
+
+8. PRECISION-RECALL CURVE (07_precision_recall_curve.png)
+   - Precision-recall curve
+   - PR-AUC score
+   - Area under curve
+
+9. METRICS COMPARISON (08_metrics_comparison.png)
+   - Per-class precision bar chart
+   - Per-class recall bar chart
+   - Per-class F1-score bar chart
+   - Value labels on bars
+
+10. PERFORMANCE HEATMAP (09_performance_heatmap.png)
+    - Per-class performance metrics heatmap
+    - Overall vs macro average comparison
+    - Color-coded performance scores
+
+11. PREDICTION DISTRIBUTION (10_prediction_distribution.png)
+    - Prediction probability distribution by class
+    - Model confidence distribution
+    - Decision threshold visualization
+
+12. STATISTICAL ANALYSIS (11_statistical_analysis.png)
+    - Actual vs predicted class distribution
+    - Probability distribution by true class
+    - Box plot of probabilities by class
+    - Probability correlation scatter plot
+
+13. ERROR ANALYSIS (12_error_analysis.png)
+    - Confidence distribution: correct vs incorrect
+    - Error confusion matrix
+    - Error rate by class
+    - Error probability distribution
+
+14. METRICS TABLE (13_metrics_table.png)
+    - Overall performance metrics table
+    - Formatted table with color coding
+
+15. COMPREHENSIVE METRICS TABLE (14_comprehensive_metrics_table.png)
+    - Overall performance metrics (detailed)
+    - Training history metrics
+    - Per-class detailed metrics
+    - Three comprehensive tables in one figure
+
+16. MODEL COMPARISON TABLE (15_model_comparison_table.png)
+    - Model performance comparison table
+    - Ready for adding future model comparisons
+
+================================================================================
+CSV TABLES (7 Files)
+================================================================================
+
+1. overall_metrics.csv
+   - Accuracy, Precision, Recall, F1-Score
+   - ROC-AUC, PR-AUC
+
+2. per_class_metrics.csv
+   - Precision, Recall, F1-Score for each class
+
+3. comprehensive_overall_metrics.csv
+   - Extended metrics including:
+     * Weighted and macro averages
+     * Cohen's Kappa
+     * Matthews Correlation
+     * Additional statistical measures
+
+4. training_metrics.csv
+   - Best and final training/validation metrics
+   - Total epochs, best epoch
+   - Final learning rate
+
+5. detailed_per_class_metrics.csv
+   - Per-class metrics with support (sample counts)
+   - Detailed breakdown for each class
+
+6. model_comparison.csv
+   - Model comparison data
+   - Ready for future model additions
+
+7. training_history.csv
+   - Complete epoch-by-epoch training history
+   - Loss, accuracy, learning rate for each epoch
+
+================================================================================
+JSON FILES (2 Files)
+================================================================================
+
+1. test_metrics.json
+   - Complete test set evaluation metrics
+   - All performance measures in structured format
+
+2. training_config.json
+   - Training configuration used
+   - Best validation accuracy
+   - Training completion timestamp
+   - Class names
+
+================================================================================
+ADDITIONAL METRICS CALCULATED
+================================================================================
+
+Beyond standard metrics, the script now calculates:
+
+1. Cohen's Kappa Score
+   - Inter-rater agreement measure
+   - Accounts for chance agreement
+
+2. Matthews Correlation Coefficient
+   - Balanced measure for binary classification
+   - Works well with imbalanced datasets
+
+3. Hamming Loss
+   - Average fraction of labels incorrectly predicted
+
+4. Jaccard Score
+   - Intersection over union measure
+
+5. Per-Class Metrics
+   - Precision, Recall, F1 for each class
+   - Support (number of samples)
+
+6. Macro vs Weighted Averages
+   - Comparison of averaging methods
+   - Better understanding of model performance
+
+================================================================================
+VISUALIZATION FEATURES
+================================================================================
+
+All visualizations include:
+✓ High resolution (300 DPI)
+✓ Publication-ready formatting
+✓ Professional color schemes
+✓ Clear labels and titles
+✓ Grid lines for readability
+✓ Legends where appropriate
+✓ Consistent styling throughout
+
+Special features:
+✓ Moving averages on learning curves
+✓ Overfitting detection indicators
+✓ Optimal threshold identification
+✓ Error analysis breakdowns
+✓ Statistical distribution plots
+✓ Heatmaps for performance comparison
+
+================================================================================
+FILE ORGANIZATION
+================================================================================
+
+training_results/
+├── plots/          (16 PNG files - 300 DPI)
+├── tables/         (7 CSV files)
+├── models/         (Best model + checkpoints)
+├── checkpoints/    (Periodic model saves)
+├── test_metrics.json
+├── training_config.json
+└── training_history.csv
+
+================================================================================
+USAGE
+================================================================================
+
+All visualizations are automatically generated during training.
+No additional steps required - just run:
+
+    python train_complete_model.py
+
+All files will be saved to the 'training_results' folder.
+
+================================================================================
+
