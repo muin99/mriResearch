@@ -1,0 +1,87 @@
+C:\Users\mdhoz\Downloads\muin-experiment\mriResearch>python train_complete_model.py
+Results will be saved to: training_results
+Using device: cpu
+============================================================
+BREAST MRI TUMOR CLASSIFICATION - COMPLETE TRAINING PIPELINE
+============================================================
+Start Time: 2025-12-26 23:06:36
+
+============================================================
+LOADING DATASET
+============================================================
+Total images found: 138965
+Classes: ['Benign', 'Malignant']
+Class distribution:
+  Benign: 69335 images (49.89%)
+  Malignant: 69630 images (50.11%)
+
+Dataset Split:
+  Training: 97275 images (70.0%)
+  Validation: 20844 images (15.0%)
+  Testing: 20846 images (15.0%)
+Saved: training_results\plots\01_dataset_statistics.png
+
+============================================================
+CREATING MODEL
+============================================================
+Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to C:\Users\mdhoz/.cache\torch\hub\checkpoints\resnet18-f37072fd.pth
+100%|████████████████████████████████████| 44.7M/44.7M [00:04<00:00, 11.7MB/s]
+Model: ResNet18
+Number of parameters: 11,177,538
+
+============================================================
+TRAINING MODEL
+============================================================
+Traceback (most recent call last):
+  File "C:\Users\mdhoz\Downloads\muin-experiment\mriResearch\train_complete_model.py", line 1404, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mdhoz\Downloads\muin-experiment\mriResearch\train_complete_model.py", line 1240, in main
+    trained_model, history, best_val_acc = train_model(
+                                           ~~~~~~~~~~~^
+        model, train_loader, val_loader, CONFIG, class_names
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mdhoz\Downloads\muin-experiment\mriResearch\train_complete_model.py", line 307, in train_model
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode='min', factor=0.5, patience=5, verbose=True
+    )
+TypeError: ReduceLROnPlateau.__init__() got an unexpected keyword argument 'verbose'
+
+C:\Users\mdhoz\Downloads\muin-experiment\mriResearch>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
