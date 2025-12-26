@@ -1,0 +1,69 @@
+================================================================================
+SYSTEM OPTIMIZATION FOR YOUR CONFIGURATION
+================================================================================
+
+YOUR SYSTEM:
+-----------
+- CPU: Intel Core i5-13420H (13th Gen)
+- RAM: 16GB
+- GPU: NVIDIA GeForce RTX 3050 6GB (Laptop)
+
+OPTIMIZED SETTINGS:
+--------------------
+
+1. BATCH SIZE: 16
+   - Optimal for RTX 3050 6GB
+   - With gradient accumulation: Effective batch size = 32
+   - Balances memory usage and training speed
+
+2. MIXED PRECISION: Enabled
+   - Uses FP16 for faster training
+   - Reduces memory usage by ~50%
+   - Maintains accuracy
+
+3. NUM WORKERS: 4
+   - Good for your CPU (8 cores)
+   - Efficient data loading
+   - Doesn't overload system
+
+4. IMAGE SIZE: 224x224
+   - Standard for ResNet18
+   - Good balance of quality and speed
+   - Fits in GPU memory
+
+5. GRADIENT ACCUMULATION: 2 steps
+   - Effective batch size = 16 * 2 = 32
+   - Better gradient estimates
+   - No extra memory cost
+
+EXPECTED PERFORMANCE:
+--------------------
+- Training Speed: ~2-4 hours for 100 epochs
+- GPU Memory Usage: ~4-5GB (safe for 6GB GPU)
+- CPU Usage: Moderate (data loading)
+- RAM Usage: ~2-4GB
+
+IF YOU GET OUT OF MEMORY ERRORS:
+--------------------------------
+1. Reduce batch_size to 12 or 8:
+   CONFIG['batch_size'] = 12  # or 8
+
+2. Reduce image_size:
+   CONFIG['image_size'] = 192  # or 128
+
+3. Disable mixed precision (if issues):
+   CONFIG['use_mixed_precision'] = False
+
+4. Reduce num_workers:
+   CONFIG['num_workers'] = 2
+
+MONITORING:
+----------
+- Watch GPU memory: nvidia-smi (in another terminal)
+- Training will show progress bars
+- Best model saves automatically
+
+================================================================================
+CURRENT SETTINGS ARE OPTIMIZED FOR YOUR RTX 3050 6GB
+================================================================================
+

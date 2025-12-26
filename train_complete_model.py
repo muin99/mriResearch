@@ -50,6 +50,23 @@ plt.rcParams['ytick.labelsize'] = 10
 plt.rcParams['legend.fontsize'] = 10
 plt.rcParams['figure.titlesize'] = 16
 
+# Check CUDA availability
+def get_device():
+    """Get the best available device"""
+    if torch.cuda.is_available():
+        device = 'cuda'
+        print(f"\n✓ CUDA is available!")
+        print(f"  GPU: {torch.cuda.get_device_name(0)}")
+        print(f"  CUDA Version: {torch.version.cuda}")
+        print(f"  GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+        print(f"  GPU Count: {torch.cuda.device_count()}")
+    else:
+        device = 'cpu'
+        print(f"\n⚠ CUDA is NOT available - using CPU")
+        print(f"  Training will be slower on CPU")
+        print(f"  Consider installing CUDA-enabled PyTorch for GPU acceleration")
+    return device
+
 # Configuration
 CONFIG = {
     'dataset_path': 'breast_mri_dataset',
@@ -1216,12 +1233,26 @@ def main():
     CONFIG['device'] = get_device()
     print(f"\nUsing device: {CONFIG['device']}")
     
-    # Adjust settings for CPU if needed
-    if CONFIG['device'] == 'cpu':
+    # Optimize settings based on device
+    if CONFIG['device'] == 'cuda':
+        # GPU optimizations for RTX 3050 6GB
+        print("\n✓ GPU Optimizations Applied:")
+        print(f"  Batch Size: {CONFIG['batch_size']} (with gradient accumulation: {CONFIG['batch_size'] * CONFIG['gradient_accumulation_steps']})")
+        print(f"  Mixed Precision: {CONFIG['use_mixed_precision']}")
+        print(f"  Workers: {CONFIG['num_workers']}")
+        # Ensure we're using GPU-optimized settings
+        if CONFIG['batch_size'] > 16:
+            CONFIG['batch_size'] = 16  # Safe for 6GB GPU
+            print(f"  → Adjusted batch size to 16 for 6GB GPU")
+    else:
+        # CPU optimizations
         CONFIG['batch_size'] = 8  # Smaller batch for CPU
         CONFIG['num_workers'] = 2  # Fewer workers for CPU
         CONFIG['use_mixed_precision'] = False  # Mixed precision only for GPU
-        print("  Adjusted settings for CPU training (smaller batch size)")
+        print("\n⚠ CPU Mode - Adjusted settings:")
+        print(f"  Batch Size: {CONFIG['batch_size']} (CPU optimized)")
+        print(f"  Workers: {CONFIG['num_workers']}")
+        print(f"  Mixed Precision: Disabled (CPU mode)")
     
     # Load dataset
     train_data, val_data, test_data, class_names = load_dataset(
