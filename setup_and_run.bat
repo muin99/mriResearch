@@ -76,38 +76,30 @@ if errorlevel 1 (
     echo WARNING: Some packages may not be installed correctly
 )
 
-REM Ask about dataset exploration
+REM Run dataset exploration automatically
 echo.
 echo ========================================================================
-echo   DATASET EXPLORATION (Optional)
+echo   DATASET EXPLORATION (Automatic)
 echo ========================================================================
-set /p run_explore="Run dataset exploration script? (y/n, default=n): "
-if /i "%run_explore%"=="y" (
-    echo.
-    echo Running dataset exploration...
-    python dataset_exploration.py
-)
+echo Running dataset exploration automatically...
+python dataset_exploration.py
 
-REM Ask about training
+REM Run training automatically
 echo.
 echo ========================================================================
-echo   MAIN TRAINING SCRIPT
+echo   MAIN TRAINING SCRIPT (Automatic)
 echo ========================================================================
 echo.
 echo IMPORTANT: Training will take 2-4 hours to complete!
+echo Starting automatically...
 echo.
-set /p run_training="Start training now? (y/n, default=y): "
-if /i not "%run_training%"=="n" (
-    echo.
-    echo ========================================================================
-    echo   STARTING TRAINING - This will take 2-4 hours
-    echo ========================================================================
-    echo Results will be saved to 'training_results' folder
-    echo.
-    python train_complete_model.py
-) else (
-    echo Training skipped. Run 'python train_complete_model.py' when ready.
-)
+echo ========================================================================
+echo   STARTING TRAINING - This will take 2-4 hours
+echo ========================================================================
+echo Results will be saved to 'training_results' folder
+echo You can minimize this window and come back later
+echo.
+python train_complete_model.py
 
 echo.
 echo ========================================================================

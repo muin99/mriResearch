@@ -8,21 +8,26 @@ import sys
 import os
 from pathlib import Path
 import time
+from datetime import datetime
 
 def print_header(text):
     """Print formatted header"""
-    print("\n" + "="*70)
-    print(f"  {text}")
-    print("="*70 + "\n")
+    header = "\n" + "="*70 + f"\n  {text}\n" + "="*70 + "\n"
+    print(header)
+    return header
 
 def print_step(step_num, total_steps, text):
     """Print step information"""
     print(f"\n[{step_num}/{total_steps}] {text}")
     print("-" * 70)
 
-def run_command(command, description, check=True):
+def run_command(command, description, check=True, log_file=None):
     """Run a command and handle errors"""
     print(f"\nExecuting: {command}")
+    if log_file:
+        with open(log_file, 'a', encoding='utf-8') as f:
+            f.write(f"\nExecuting: {command}\n")
+    
     try:
         result = subprocess.run(
             command,
@@ -33,16 +38,26 @@ def run_command(command, description, check=True):
         )
         if result.stdout:
             print(result.stdout)
+            if log_file:
+                with open(log_file, 'a', encoding='utf-8') as f:
+                    f.write(result.stdout + "\n")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"ERROR: {description}")
-        print(f"Error output: {e.stderr}")
+        error_msg = f"ERROR: {description}\nError output: {e.stderr}"
+        print(error_msg)
+        if log_file:
+            with open(log_file, 'a', encoding='utf-8') as f:
+                f.write(error_msg + "\n")
         if check:
             print("\n⚠️  Installation failed. Please check the error above.")
             return False
         return False
     except Exception as e:
-        print(f"ERROR: {str(e)}")
+        error_msg = f"ERROR: {str(e)}"
+        print(error_msg)
+        if log_file:
+            with open(log_file, 'a', encoding='utf-8') as f:
+                f.write(error_msg + "\n")
         return False
 
 def check_python():
@@ -210,108 +225,173 @@ def run_python_script(script_name, description):
     
     return success
 
+def log_message(message, log_file_path="setup_and_training.log"):
+    """Log message to both console and file"""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_msg = f"[{timestamp}] {message}"
+    print(message)
+    try:
+        with open(log_file_path, 'a', encoding='utf-8') as f:
+            f.write(log_msg + "\n")
+    except:
+        pass  # If logging fails, just print
+
 def main():
-    """Main execution flow"""
-    print_header("COMPLETE SETUP AND EXECUTION SCRIPT")
-    print("This script will:")
-    print("1. Check Python and pip installation")
-    print("2. Upgrade pip to latest version")
-    print("3. Install PyTorch with CUDA support")
-    print("4. Install all required libraries")
-    print("5. Verify installation")
-    print("6. Run dataset exploration (optional)")
-    print("7. Run main training script")
-    print("\nThis process may take 15-30 minutes for installation")
-    print("Training will take an additional 2-4 hours")
+    """Main execution flow - Fully automated, no user interaction"""
+    # Create/clear log file
+    log_file = Path("setup_and_training.log")
+    if log_file.exists():
+        log_file.unlink()  # Clear old log
     
-    input("\nPress ENTER to continue or Ctrl+C to cancel...")
+    start_time = datetime.now()
+    log_message("="*70)
+    log_message("COMPLETE SETUP AND EXECUTION SCRIPT - FULLY AUTOMATED")
+    log_message("="*70)
+    log_message(f"Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    log_message("="*70)
+    
+    log_message("="*70)
+    log_message("COMPLETE SETUP AND EXECUTION SCRIPT - FULLY AUTOMATED")
+    log_message("="*70)
+    log_message(f"Start Time: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    log_message("="*70)
+    log_message("This script will:")
+    log_message("1. Check Python and pip installation")
+    log_message("2. Upgrade pip to latest version")
+    log_message("3. Install PyTorch with CUDA support")
+    log_message("4. Install all required libraries")
+    log_message("5. Verify installation")
+    log_message("6. Run dataset exploration")
+    log_message("7. Run main training script (2-4 hours)")
+    log_message("\nThis process may take 15-30 minutes for installation")
+    log_message("Training will take an additional 2-4 hours")
+    log_message("\nStarting automatically in 3 seconds...")
+    log_message("(All output will be logged to: setup_and_training.log)")
+    
+    for i in range(3, 0, -1):
+        print(f"Starting in {i}...", end='\r')
+        time.sleep(1)
+    print("\n")
+    log_message("\n" + "="*70)
     
     total_steps = 8
     step = 1
     
     # Step 1: Check Python
     print_step(step, total_steps, "Checking Python Installation")
+    log_message(f"[Step {step}/{total_steps}] Checking Python Installation")
     if not check_python():
-        print("✗ Python check failed. Please install Python 3.8+")
+        log_message("✗ Python check failed. Please install Python 3.8+")
         return False
+    log_message("✓ Python check passed")
     step += 1
     time.sleep(1)
     
     # Step 2: Check pip
     print_step(step, total_steps, "Checking pip Installation")
+    log_message(f"[Step {step}/{total_steps}] Checking pip Installation")
     if not check_pip():
-        print("✗ pip not found. Please install pip")
+        log_message("✗ pip not found. Please install pip")
         return False
+    log_message("✓ pip check passed")
     step += 1
     time.sleep(1)
     
     # Step 3: Upgrade pip
     print_step(step, total_steps, "Upgrading pip")
+    log_message(f"[Step {step}/{total_steps}] Upgrading pip")
     upgrade_pip()
+    log_message("✓ pip upgrade completed")
     step += 1
     time.sleep(1)
     
     # Step 4: Install PyTorch
     print_step(step, total_steps, "Installing PyTorch (This takes 5-10 minutes)")
+    log_message(f"[Step {step}/{total_steps}] Installing PyTorch (This takes 5-10 minutes)")
     install_pytorch()
+    log_message("✓ PyTorch installation completed")
     step += 1
     time.sleep(2)
     
     # Step 5: Install requirements
     print_step(step, total_steps, "Installing All Requirements (This takes 5-15 minutes)")
+    log_message(f"[Step {step}/{total_steps}] Installing All Requirements (This takes 5-15 minutes)")
     install_requirements()
+    log_message("✓ Requirements installation completed")
     step += 1
     time.sleep(2)
     
     # Step 6: Verify installation
     print_step(step, total_steps, "Verifying Installation")
+    log_message(f"[Step {step}/{total_steps}] Verifying Installation")
     if not verify_installation():
-        print("\n⚠️  Some packages may not be installed correctly")
-        print("   You can continue, but some features may not work")
-        response = input("\nContinue anyway? (y/n): ")
-        if response.lower() != 'y':
-            return False
-    step += 1
-    time.sleep(1)
-    
-    # Step 7: Run dataset exploration (optional)
-    print_step(step, total_steps, "Dataset Exploration (Optional)")
-    response = input("\nRun dataset exploration script? (y/n, default=n): ")
-    if response.lower() == 'y':
-        run_python_script("dataset_exploration.py", "Dataset Exploration")
+        log_message("\n⚠️  Some packages may not be installed correctly")
+        log_message("   Continuing anyway...")
     else:
-        print("Skipping dataset exploration")
+        log_message("✓ All packages verified")
     step += 1
     time.sleep(1)
     
-    # Step 8: Run main training script
+    # Step 7: Run dataset exploration (automatic)
+    print_step(step, total_steps, "Dataset Exploration")
+    log_message(f"[Step {step}/{total_steps}] Running Dataset Exploration")
+    log_message("Running dataset exploration automatically...")
+    run_python_script("dataset_exploration.py", "Dataset Exploration")
+    log_message("✓ Dataset exploration completed")
+    step += 1
+    time.sleep(1)
+    
+    # Step 8: Run main training script (automatic)
     print_step(step, total_steps, "Main Training Script")
-    print("\n⚠️  IMPORTANT: This will take 2-4 hours to complete!")
-    print("   The script will train the model and generate all visualizations")
-    response = input("\nStart training now? (y/n, default=y): ")
+    log_message(f"[Step {step}/{total_steps}] Starting Main Training Script")
+    log_message("\n" + "="*70)
+    log_message("STARTING TRAINING AUTOMATICALLY")
+    log_message("="*70)
+    log_message("⚠️  This will take 2-4 hours to complete!")
+    log_message("   The script will train the model and generate all visualizations")
+    log_message("   Results will be saved to 'training_results' folder")
+    log_message("="*70 + "\n")
     
-    if response.lower() != 'n':
-        print("\n" + "="*70)
-        print("STARTING TRAINING - This will take 2-4 hours")
-        print("="*70)
-        print("You can monitor progress in the terminal")
-        print("Results will be saved to 'training_results' folder")
-        print("="*70 + "\n")
-        
-        time.sleep(2)
-        run_python_script("train_complete_model.py", "Model Training")
-    else:
-        print("Training skipped. Run 'python train_complete_model.py' when ready.")
+    print("\n" + "="*70)
+    print("STARTING TRAINING AUTOMATICALLY")
+    print("="*70)
+    print("⚠️  This will take 2-4 hours to complete!")
+    print("   You can safely minimize this window and come back later")
+    print("   All progress is logged to: setup_and_training.log")
+    print("   Results will be saved to 'training_results' folder")
+    print("="*70 + "\n")
+    
+    time.sleep(3)
+    run_python_script("train_complete_model.py", "Model Training")
+    log_message("✓ Training completed")
     
     # Final summary
-    print_header("SETUP AND EXECUTION COMPLETE")
-    print("\nSummary:")
-    print("✓ All libraries installed")
-    print("✓ Scripts executed")
-    print("\nNext steps:")
-    print("  - Check 'training_results' folder for outputs")
-    print("  - View visualizations in 'training_results/plots'")
-    print("  - Check metrics in 'training_results/tables'")
+    end_time = datetime.now()
+    duration = end_time - start_time
+    
+    log_message("\n" + "="*70)
+    log_message("SETUP AND EXECUTION COMPLETE")
+    log_message("="*70)
+    log_message(f"End Time: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    log_message(f"Total Duration: {duration}")
+    log_message("\nSummary:")
+    log_message("✓ All libraries installed")
+    log_message("✓ Dataset exploration completed")
+    log_message("✓ Training completed")
+    log_message("\nResults:")
+    log_message("  - Check 'training_results' folder for outputs")
+    log_message("  - View visualizations in 'training_results/plots'")
+    log_message("  - Check metrics in 'training_results/tables'")
+    log_message("  - View complete log in 'setup_and_training.log'")
+    log_message("\n" + "="*70)
+    
+    print("\n" + "="*70)
+    print("✓ ALL DONE! Everything completed successfully.")
+    print("="*70)
+    print(f"\nTotal time: {duration}")
+    print("\nCheck these folders for results:")
+    print("  - training_results/ (all outputs)")
+    print("  - setup_and_training.log (complete log)")
     print("\n" + "="*70)
     
     return True
@@ -320,10 +400,17 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open("setup_and_training.log", 'a', encoding='utf-8') as f:
+            f.write(f"\n[{log_time}] ⚠️  Process interrupted by user\n")
         print("\n\n⚠️  Process interrupted by user")
-        print("Installation may be incomplete")
+        print("Check setup_and_training.log for progress")
         sys.exit(1)
     except Exception as e:
+        log_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open("setup_and_training.log", 'a', encoding='utf-8') as f:
+            f.write(f"\n[{log_time}] ✗ Unexpected error: {e}\n")
         print(f"\n\n✗ Unexpected error: {e}")
+        print("Check setup_and_training.log for details")
         sys.exit(1)
 
