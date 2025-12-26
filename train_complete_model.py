@@ -53,6 +53,12 @@ plt.rcParams['figure.titlesize'] = 16
 # Check CUDA availability
 def get_device():
     """Get the best available device"""
+    print(f"\n{'='*60}")
+    print("DEVICE DETECTION")
+    print(f"{'='*60}")
+    print(f"PyTorch Version: {torch.__version__}")
+    print(f"CUDA Built-in: {torch.version.cuda if torch.version.cuda else 'None (CPU-only build)'}")
+    
     if torch.cuda.is_available():
         device = 'cuda'
         print(f"\n✓ CUDA is available!")
@@ -60,11 +66,31 @@ def get_device():
         print(f"  CUDA Version: {torch.version.cuda}")
         print(f"  GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
         print(f"  GPU Count: {torch.cuda.device_count()}")
+        
+        # Test GPU with a simple operation
+        try:
+            test_tensor = torch.randn(10, 10).cuda()
+            print(f"  GPU Test: ✓ Working correctly")
+            del test_tensor
+            torch.cuda.empty_cache()
+        except Exception as e:
+            print(f"  GPU Test: ✗ Error - {e}")
     else:
         device = 'cpu'
         print(f"\n⚠ CUDA is NOT available - using CPU")
-        print(f"  Training will be slower on CPU")
-        print(f"  Consider installing CUDA-enabled PyTorch for GPU acceleration")
+        print(f"  Training will be MUCH slower on CPU (estimated: 1-2 days)")
+        print(f"  Your RTX 3050 6GB GPU is not being used!")
+        print(f"\n  DIAGNOSTIC INFO:")
+        print(f"    PyTorch Version: {torch.__version__}")
+        print(f"    CUDA in PyTorch: {torch.version.cuda if torch.version.cuda else 'None (CPU-only build)'}")
+        print(f"\n  TO FIX (if using venv, make sure it's activated!):")
+        print(f"  1. Activate venv: venv\\Scripts\\activate (Windows)")
+        print(f"  2. Run: pip uninstall torch torchvision torchaudio -y")
+        print(f"  3. Run: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118")
+        print(f"  4. Verify: python -c \"import torch; print(torch.cuda.is_available())\"")
+        print(f"  5. See FIX_VENV_CUDA.txt for detailed instructions")
+        print(f"\n  Continuing with CPU training (press Ctrl+C to stop and install CUDA)...")
+    print(f"{'='*60}\n")
     return device
 
 # Configuration

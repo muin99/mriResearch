@@ -1,0 +1,143 @@
+================================================================================
+INSTALLING PYTORCH WITH CUDA SUPPORT FOR RTX 3050 6GB
+================================================================================
+
+CURRENT ISSUE:
+--------------
+PyTorch is installed WITHOUT CUDA support
+→ Training is running on CPU (very slow: 2.64 it/s)
+→ Your RTX 3050 6GB GPU is not being used
+
+SOLUTION:
+---------
+Install PyTorch with CUDA support
+
+================================================================================
+STEP-BY-STEP INSTALLATION
+================================================================================
+
+STEP 1: Check Your CUDA Version
+-------------------------------
+1. Open Command Prompt or PowerShell
+2. Run: nvidia-smi
+3. Look for "CUDA Version: XX.X" at the top
+   Example: "CUDA Version: 12.1" or "11.8"
+
+If nvidia-smi doesn't work:
+→ Your NVIDIA drivers might not be installed
+→ Download from: https://www.nvidia.com/Download/index.aspx
+
+STEP 2: Uninstall Current PyTorch
+----------------------------------
+Run these commands:
+
+    pip uninstall torch torchvision torchaudio
+
+STEP 3: Install PyTorch with CUDA
+----------------------------------
+
+FOR CUDA 11.8 (Most Common):
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+FOR CUDA 12.1:
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+FOR CUDA 12.4:
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+IF YOU'RE NOT SURE:
+    → Use CUDA 11.8 (most compatible)
+    → Or check: https://pytorch.org/get-started/locally/
+
+STEP 4: Verify Installation
+----------------------------
+Run this Python command:
+
+    python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
+
+Expected Output:
+    CUDA Available: True
+    GPU: NVIDIA GeForce RTX 3050 Laptop GPU
+
+If it says "CUDA Available: False":
+    → PyTorch was installed without CUDA
+    → Repeat Step 2 and 3
+
+STEP 5: Run Training Again
+--------------------------
+    python train_complete_model.py
+
+You should now see:
+    ✓ CUDA is available!
+      GPU: NVIDIA GeForce RTX 3050 Laptop GPU
+      CUDA Version: 11.8
+      GPU Memory: 6.00 GB
+
+================================================================================
+QUICK INSTALL (Copy-Paste)
+================================================================================
+
+# Uninstall old PyTorch
+pip uninstall torch torchvision torchaudio -y
+
+# Install with CUDA 11.8 (recommended)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Verify
+python -c "import torch; print('CUDA:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "nvidia-smi not found"
+Solution:
+→ Install NVIDIA drivers first
+→ Download from: https://www.nvidia.com/Download/index.aspx
+→ Restart computer after installation
+
+Problem: "CUDA Available: False" after installation
+Solution:
+1. Check CUDA version: nvidia-smi
+2. Make sure you installed the matching PyTorch version
+3. Restart your terminal/command prompt
+4. Try: python -c "import torch; print(torch.version.cuda)"
+
+Problem: "Out of memory" errors
+Solution:
+→ Reduce batch_size in train_complete_model.py
+→ Change: CONFIG['batch_size'] = 16 to CONFIG['batch_size'] = 8
+
+Problem: Installation takes too long
+Solution:
+→ This is normal (PyTorch is ~2GB)
+→ Use stable internet connection
+→ Be patient, it will complete
+
+================================================================================
+PERFORMANCE COMPARISON
+================================================================================
+
+CURRENT (CPU):
+    Speed: ~2.64 it/s
+    Estimated time: 1-2 DAYS for training
+    GPU Usage: 0%
+
+AFTER CUDA INSTALL (GPU):
+    Speed: ~50-100 it/s (estimated)
+    Estimated time: 2-4 HOURS for training
+    GPU Usage: 80-95%
+
+================================================================================
+RECOMMENDED: Use CUDA 11.8
+================================================================================
+
+Most stable and compatible version:
+
+    pip uninstall torch torchvision torchaudio -y
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+Then verify and run training again!
+
+================================================================================
+

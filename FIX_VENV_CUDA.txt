@@ -1,0 +1,131 @@
+================================================================================
+FIXING CUDA IN VIRTUAL ENVIRONMENT (VENV)
+================================================================================
+
+PROBLEM:
+--------
+You're using a venv, but PyTorch in the venv doesn't have CUDA support
+→ GPU is not being used even though CUDA is installed
+
+SOLUTION:
+---------
+Install CUDA-enabled PyTorch INSIDE your venv
+
+================================================================================
+STEP-BY-STEP FIX
+================================================================================
+
+STEP 1: Activate Your Virtual Environment
+-----------------------------------------
+Make sure your venv is activated:
+
+    # Windows (PowerShell)
+    .\venv\Scripts\Activate.ps1
+
+    # Windows (Command Prompt)
+    venv\Scripts\activate
+
+    # Linux/Mac
+    source venv/bin/activate
+
+You should see (venv) in your prompt:
+    (venv) C:\Users\...>
+
+STEP 2: Check Current PyTorch Installation in Venv
+---------------------------------------------------
+Run this to see what's installed:
+
+    python -c "import torch; print('PyTorch Version:', torch.__version__); print('CUDA Available:', torch.cuda.is_available()); print('CUDA Version:', torch.version.cuda if torch.cuda.is_available() else 'None')"
+
+If it shows:
+    CUDA Available: False
+    CUDA Version: None
+→ PyTorch in venv doesn't have CUDA support
+
+STEP 3: Uninstall PyTorch from Venv
+------------------------------------
+Make sure venv is activated, then:
+
+    pip uninstall torch torchvision torchaudio -y
+
+STEP 4: Install PyTorch with CUDA in Venv
+------------------------------------------
+Still in activated venv:
+
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+This installs CUDA-enabled PyTorch INSIDE your venv.
+
+STEP 5: Verify Installation
+----------------------------
+Run this again:
+
+    python -c "import torch; print('CUDA Available:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None'); print('CUDA Version:', torch.version.cuda)"
+
+Expected Output:
+    CUDA Available: True
+    GPU: NVIDIA GeForce RTX 3050 Laptop GPU
+    CUDA Version: 11.8
+
+STEP 6: Run Training
+--------------------
+Now run your training script:
+
+    python train_complete_model.py
+
+You should see:
+    ✓ CUDA is available!
+      GPU: NVIDIA GeForce RTX 3050 Laptop GPU
+
+================================================================================
+QUICK FIX (Copy-Paste in Activated Venv)
+================================================================================
+
+# Make sure venv is activated first!
+# Then run:
+
+pip uninstall torch torchvision torchaudio -y
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python -c "import torch; print('CUDA:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None')"
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+1. EACH VENV HAS ITS OWN PACKAGES
+   → Installing PyTorch outside venv doesn't help
+   → Must install CUDA PyTorch INSIDE the venv
+
+2. CHECK YOU'RE IN THE RIGHT VENV
+   → Look for (venv) in your prompt
+   → Run: which python (should show venv path)
+
+3. VERIFY AFTER INSTALLATION
+   → Always run the verification command
+   → Make sure CUDA Available: True
+
+4. IF STILL NOT WORKING
+   → Check nvidia-smi shows your GPU
+   → Verify CUDA toolkit is installed
+   → Try: python -c "import torch; print(torch.cuda.is_available())"
+
+================================================================================
+DIAGNOSTIC COMMANDS
+================================================================================
+
+Check if GPU is visible to system:
+    nvidia-smi
+
+Check PyTorch in venv:
+    python -c "import torch; print(torch.cuda.is_available())"
+
+Check CUDA version:
+    python -c "import torch; print(torch.version.cuda)"
+
+Check which Python you're using:
+    which python
+    # Should show: .../venv/Scripts/python.exe (Windows)
+    # Or: .../venv/bin/python (Linux/Mac)
+
+================================================================================
+
