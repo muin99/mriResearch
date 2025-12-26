@@ -1,0 +1,73 @@
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] COMPLETE SETUP AND EXECUTION SCRIPT - FULLY AUTOMATED
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] Start Time: 2025-12-26 22:15:18
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] COMPLETE SETUP AND EXECUTION SCRIPT - FULLY AUTOMATED
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] Start Time: 2025-12-26 22:15:18
+[2025-12-26 22:15:18] ======================================================================
+[2025-12-26 22:15:18] This script will:
+[2025-12-26 22:15:18] 1. Check Python and pip installation
+[2025-12-26 22:15:18] 2. Upgrade pip to latest version
+[2025-12-26 22:15:18] 3. Install PyTorch with CUDA support
+[2025-12-26 22:15:18] 4. Install all required libraries
+[2025-12-26 22:15:18] 5. Verify installation
+[2025-12-26 22:15:18] 6. Run dataset exploration
+[2025-12-26 22:15:18] 7. Run main training script (2-4 hours)
+[2025-12-26 22:15:18] 
+This process may take 15-30 minutes for installation
+[2025-12-26 22:15:18] Training will take an additional 2-4 hours
+[2025-12-26 22:15:18] 
+Starting automatically in 3 seconds...
+[2025-12-26 22:15:18] (All output will be logged to: setup_and_training.log)
+[2025-12-26 22:15:21] 
+======================================================================
+[2025-12-26 22:15:21] [Step 1/8] Checking Python Installation
+[2025-12-26 22:15:21] ✓ Python check passed
+[2025-12-26 22:15:22] [Step 2/8] Checking pip Installation
+[2025-12-26 22:15:23] ✓ pip check passed
+[2025-12-26 22:15:24] [Step 3/8] Upgrading pip
+[2025-12-26 22:15:24] ✓ pip upgrade completed
+[2025-12-26 22:15:25] [Step 4/8] Installing PyTorch (This takes 5-10 minutes)
+[2025-12-26 22:15:30] ✓ PyTorch installation completed
+[2025-12-26 22:15:32] [Step 5/8] Installing All Requirements (This takes 5-15 minutes)
+[2025-12-26 22:15:32] ✓ Requirements installation completed
+[2025-12-26 22:15:34] [Step 6/8] Verifying Installation
+[2025-12-26 22:15:34] 
+⚠️  Some packages may not be installed correctly
+[2025-12-26 22:15:34]    Continuing anyway...
+[2025-12-26 22:15:35] [Step 7/8] Running Dataset Exploration
+[2025-12-26 22:15:35] Running dataset exploration automatically...
+[2025-12-26 22:15:35] ✓ Dataset exploration completed
+[2025-12-26 22:15:36] [Step 8/8] Starting Main Training Script
+[2025-12-26 22:15:36] 
+======================================================================
+[2025-12-26 22:15:36] STARTING TRAINING AUTOMATICALLY
+[2025-12-26 22:15:36] ======================================================================
+[2025-12-26 22:15:36] ⚠️  This will take 2-4 hours to complete!
+[2025-12-26 22:15:36]    The script will train the model and generate all visualizations
+[2025-12-26 22:15:36]    Results will be saved to 'training_results' folder
+[2025-12-26 22:15:36] ======================================================================
+
+[2025-12-26 22:15:39] ✓ Training completed
+[2025-12-26 22:15:39] 
+======================================================================
+[2025-12-26 22:15:39] SETUP AND EXECUTION COMPLETE
+[2025-12-26 22:15:39] ======================================================================
+[2025-12-26 22:15:39] End Time: 2025-12-26 22:15:39
+[2025-12-26 22:15:39] Total Duration: 0:00:20.728334
+[2025-12-26 22:15:39] 
+Summary:
+[2025-12-26 22:15:39] ✓ All libraries installed
+[2025-12-26 22:15:39] ✓ Dataset exploration completed
+[2025-12-26 22:15:39] ✓ Training completed
+[2025-12-26 22:15:39] 
+Results:
+[2025-12-26 22:15:39]   - Check 'training_results' folder for outputs
+[2025-12-26 22:15:39]   - View visualizations in 'training_results/plots'
+[2025-12-26 22:15:39]   - Check metrics in 'training_results/tables'
+[2025-12-26 22:15:39]   - View complete log in 'setup_and_training.log'
+[2025-12-26 22:15:39] 
+======================================================================
