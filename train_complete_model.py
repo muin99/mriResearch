@@ -61,7 +61,7 @@ CONFIG = {
     'patience': 15,  # Early stopping patience
     'image_size': 224,
     'num_workers': 4,
-    'device': 'cuda' if torch.cuda.is_available() else 'cpu',
+    'device': None,  # Will be set automatically
     'gradient_accumulation_steps': 2,  # Effective batch size = 32
     'save_best_model': True,
     'use_mixed_precision': True,  # For memory efficiency
@@ -76,10 +76,6 @@ results_dir.mkdir(exist_ok=True)
 (results_dir / 'checkpoints').mkdir(exist_ok=True)
 
 print(f"Results will be saved to: {results_dir}")
-print(f"Using device: {CONFIG['device']}")
-if CONFIG['device'] == 'cuda':
-    print(f"GPU: {torch.cuda.get_device_name(0)}")
-    print(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
 
 
 class BreastMRIDataset(Dataset):
@@ -305,7 +301,7 @@ def train_model(model, train_loader, val_loader, config, class_names):
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=config['learning_rate'], weight_decay=config['weight_decay'])
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, mode='min', factor=0.5, patience=5, verbose=True
+        optimizer, mode='min', factor=0.5, patience=5
     )
     
     scaler = torch.cuda.amp.GradScaler() if config['use_mixed_precision'] else None
@@ -346,6 +342,10 @@ def train_model(model, train_loader, val_loader, config, class_names):
         print(f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f}")
         print(f"Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
         print(f"Learning Rate: {current_lr:.6f}")
+        
+        # Print LR change if it happened
+        if epoch > 0 and history['learning_rate'][-1] != history['learning_rate'][-2]:
+            print(f"  → Learning rate reduced to {current_lr:.6f}")
         
         # Save best model
         if val_acc > best_val_acc:
@@ -1211,6 +1211,17 @@ def main():
     print("BREAST MRI TUMOR CLASSIFICATION - COMPLETE TRAINING PIPELINE")
     print("="*60)
     print(f"Start Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # Set device
+    CONFIG['device'] = get_device()
+    print(f"\nUsing device: {CONFIG['device']}")
+    
+    # Adjust settings for CPU if needed
+    if CONFIG['device'] == 'cpu':
+        CONFIG['batch_size'] = 8  # Smaller batch for CPU
+        CONFIG['num_workers'] = 2  # Fewer workers for CPU
+        CONFIG['use_mixed_precision'] = False  # Mixed precision only for GPU
+        print("  Adjusted settings for CPU training (smaller batch size)")
     
     # Load dataset
     train_data, val_data, test_data, class_names = load_dataset(
